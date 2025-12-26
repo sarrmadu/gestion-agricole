@@ -42,6 +42,21 @@
         /* Styles personnalisés additionnels */
         .sidebar {
             background: linear-gradient(180deg, #1B5E20 0%, #0d4211 100%);
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 16rem; /* 64 * 0.25rem = 16rem */
+            overflow-y: auto;
+            z-index: 40;
+        }
+        
+        .main-content {
+            margin-left: 16rem; /* Même largeur que le sidebar */
+            width: calc(100% - 16rem);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .nav-link {
@@ -77,14 +92,32 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
         }
+
+        /* Personnalisation de la scrollbar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
     </style>
     
     @stack('styles')
 </head>
 <body class="bg-gray-50 font-sans">
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <div class="sidebar w-64 text-white flex flex-col">
+    <div class="flex">
+        <!-- Sidebar Fixe -->
+        <div class="sidebar text-white flex flex-col">
             <!-- Logo -->
             <div class="p-6 border-b border-green-700">
                 <div class="flex items-center space-x-3">
@@ -152,7 +185,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
+        <div class="main-content">
             <!-- Header -->
             <header class="bg-white border-b shadow-sm px-6 py-4">
                 <div class="flex justify-between items-center">
